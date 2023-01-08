@@ -1,4 +1,5 @@
 import {Table, Center} from '@mantine/core'
+import {useSelector} from 'react-redux'
 
 const elements = [
   {position: 1, score: 100, symbol: 'C', name: 'Carbon'},
@@ -9,6 +10,7 @@ const elements = [
 ]
 
 export function LeaderBoard() {
+  const language = useSelector(state => state.language.language.pages.games)
   const rows = elements.map(element => (
     <tr key={element.name}>
       <td>{element.position}</td>
@@ -24,8 +26,8 @@ export function LeaderBoard() {
       <thead>
         <tr>
           <th>№</th>
-          <th>Имя</th>
-          <th>Количество очков</th>
+          <th>{language.leaderboard.name}</th>
+          <th>{language.leaderboard.score}</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>

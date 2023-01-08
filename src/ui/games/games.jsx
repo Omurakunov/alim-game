@@ -9,16 +9,7 @@ import {
   IconReport
 } from '@tabler/icons'
 import {NavLink} from 'react-router-dom'
-
-const mockdata = [
-  {title: 'Игра камни', icon: IconCreditCard, color: 'violet', link: '/stones-game'},
-  {title: 'Игра про квартиры', icon: IconBuildingBank, color: 'indigo', link: '/apartments-game'},
-  {title: 'Игра Быки и коровы', icon: IconRepeat, color: 'blue', link: '/guess-number-game'},
-  {title: 'Игра числа Ним', icon: IconReceiptRefund, color: 'green', link: '/nim-numbers-game'},
-  {title: 'Игра системы счисления', icon: IconReceipt, color: 'teal', link: '/number-systems-game'},
-  {title: 'Игра на программирование', icon: IconReceiptTax, color: 'cyan', link: '/programming-game'},
-  {title: 'Игра торговец', icon: IconReport, color: 'pink', link: '/traider-game'}
-]
+import {useSelector} from 'react-redux'
 
 const useStyles = createStyles(theme => ({
   card: {
@@ -49,6 +40,17 @@ const useStyles = createStyles(theme => ({
 }))
 
 export function ActionsGrid() {
+  const language = useSelector(state => state.language.language.pages.games)
+
+  const mockdata = [
+    {title: language.list[0], icon: IconCreditCard, color: 'violet', link: '/stones-game'},
+    {title: language.list[1], icon: IconBuildingBank, color: 'indigo', link: '/apartments-game'},
+    {title: language.list[2], icon: IconRepeat, color: 'blue', link: '/guess-number-game'},
+    {title: language.list[3], icon: IconReceiptRefund, color: 'green', link: '/nim-numbers-game'},
+    {title: language.list[4], icon: IconReceipt, color: 'teal', link: '/number-systems-game'},
+    {title: language.list[5], icon: IconReceiptTax, color: 'cyan', link: '/programming-game'},
+    {title: language.list[6], icon: IconReport, color: 'pink', link: '/traider-game'}
+  ]
   const {classes, theme} = useStyles()
 
   const items = mockdata.map(item => (
@@ -65,7 +67,7 @@ export function ActionsGrid() {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Group position="apart">
-        <Text className={classes.title}>Игры</Text>
+        <Text className={classes.title}>{language.title}</Text>
       </Group>
       <SimpleGrid cols={3} mt="md">
         {items}

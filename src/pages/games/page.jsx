@@ -3,16 +3,19 @@ import {Center, Tabs} from '@mantine/core'
 import {PageTemplate} from '../../ui'
 import {ActionsGrid} from '@/ui/games/games.jsx'
 import {LeaderBoard} from '@/ui/games/leaderboard.jsx'
+import {useSelector} from 'react-redux'
 
 export const GamesPage = () => {
+  const language = useSelector(state => state.language.language.pages.games)
+
   return (
     <PageTemplate>
       <Center>
         <Tabs color="teal" defaultValue="games">
           <Tabs.List position="center">
-            <Tabs.Tab value="games">Игры</Tabs.Tab>
+            <Tabs.Tab value="games">{language.tabs[0]}</Tabs.Tab>
             <Tabs.Tab value="leaderboard" color="blue">
-              Таблица участников:
+              {language.tabs[1]}:
             </Tabs.Tab>
           </Tabs.List>
 

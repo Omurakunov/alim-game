@@ -6,7 +6,7 @@ const height = window.screen.height < 640 ? window.screen.height : 640
 
 export class MainScene extends Phaser.Scene {
   constructor() {
-    super()
+    super({key: 'MainScene'})
     this.score = 0
   }
 

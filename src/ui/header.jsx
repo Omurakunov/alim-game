@@ -1,6 +1,8 @@
 import {createStyles, Header, Group, Burger, Container, Button, Transition, Paper} from '@mantine/core'
 import {useDisclosure} from '@mantine/hooks'
 import {NavLink} from 'react-router-dom'
+import {useSelector} from 'react-redux'
+import LanguagePicker from './language-picker'
 
 const HEADER_HEIGHT = 56
 
@@ -74,9 +76,11 @@ const useStyles = createStyles(theme => ({
 }))
 
 export function HeaderMenu() {
+  const language = useSelector(state => state.language.language)
+
   const links = [
-    {link: '/', label: 'Домой'},
-    {link: '/games', label: 'Игры'}
+    {link: '/', label: language.header.links[0]},
+    {link: '/games', label: language.header.links[1]}
   ]
   const [opened, {toggle}] = useDisclosure(false)
   const {classes} = useStyles()
@@ -97,10 +101,11 @@ export function HeaderMenu() {
             {items}
           </Group>
           <Group className={classes.hiddenMobile}>
+            <LanguagePicker />
             <NavLink to="/login">
-              <Button variant="default">Log in</Button>
+              <Button variant="default">{language.header.login}</Button>
             </NavLink>
-            <Button>Sign up</Button>
+            <Button>{language.header.registration}</Button>
           </Group>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" color="#fff" />
           <Transition transition="pop-top-right" duration={200} mounted={opened}>
